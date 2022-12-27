@@ -1,0 +1,31 @@
+EXAMPLE:
+
+
+public class Player : MonoBehaviour, ISaveable    	// Note: you have to inherit from ISaveable
+{
+
+    public float playerHealth, playerMaxHealth;
+
+    public object SaveState()		// Save the data
+    {
+        return new SaveData()
+        {
+            Health = playerHealth,
+            maxHealth = playerMaxHealth
+        };
+    }
+
+    public void LoadState(object state)		// Load the data
+    {
+        var saveData = (SaveData)state;
+        playerHealth = saveData.Health;
+        playerMaxHealth = saveData.maxHealth;
+    }
+
+
+    private struct SaveData		// make a struct with the data you want to save
+    {
+        public float Health;
+        public float maxHealth;
+    }
+}
